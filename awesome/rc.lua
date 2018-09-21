@@ -522,11 +522,7 @@ clientkeys = gears.table.join(
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized = not c.maximized
-            if c.maximized then
-                c.border_width = 0
-            else
-                c.border_width = beautiful.border_width
-            end
+            setBorderWidth(c)
             c:raise()
         end ,
         {description = "(un)maximize", group = "client"}),
@@ -731,7 +727,19 @@ end)
 --    end
 --end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+function setBorderWidth(c)
+    local screen = c.screen
+    if #screen:get_clients() == 1 or c.maximized then
+        c.border_width = 0
+    else
+        c.border_width = beautiful.border_width
+    end
+end
+
+client.connect_signal("focus", function(c)
+    c.border_color = beautiful.border_focus
+end)
+client.connect_signal("property::size", setBorderWidth)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 autostart = {
