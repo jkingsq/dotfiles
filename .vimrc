@@ -49,3 +49,9 @@ cmap jf <C-c>
 cmap KJ <Esc>l
 vmap v <Esc>
 nmap ; :
+nmap <Space>h 10h
+nmap <Space>l 10l
+nmap <Space><Space>h ^
+nmap <Space><Space>l $
+nmap <Space>j 5j
+nmap <Space>k 5k
