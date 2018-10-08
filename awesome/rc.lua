@@ -521,8 +521,12 @@ clientkeys = gears.table.join(
           {description = "minimize", group = "client"}),
     awful.key({ modkey,           }, "m",
         function (c)
+            if not maximized then
+                c.border_width = 0
+            else
+                c.border_width = beautiful.border_width
+            end
             c.maximized = not c.maximized
-            setBorderWidth(c)
             c:raise()
         end ,
         {description = "(un)maximize", group = "client"}),
@@ -604,7 +608,7 @@ root.keys(globalkeys)
 awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
-      properties = { border_width = beautiful.border_width,
+      properties = { border_width = 0,
                      border_color = beautiful.border_normal,
                      focus = awful.client.focus.filter,
                      raise = true,
