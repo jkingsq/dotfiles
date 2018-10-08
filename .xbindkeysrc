@@ -83,7 +83,7 @@
 
 "sudo xbacklight -inc 5"
    XF86MonBrightnessUp
-"sudo xbacklight -dec 5"
+"sudo xbacklight -dec 5; sudo xbacklight -inc 1"
    XF86MonBrightnessDown
 
 ##################################
