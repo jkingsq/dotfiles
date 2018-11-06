@@ -438,6 +438,15 @@ globalkeys = gears.table.join(
     -- Menubar
     --awful.key({ modkey }, "p", function() menubar.show() end,
               --{description = "show the menubar", group = "launcher"}),
+    awful.key({ modkey,           }, "p",
+        function()
+            for k, v in pairs(client.get()) do
+                if #v:tags() == 0 then
+                    v:move_to_screen(awful.screen.focused())
+                    v:to_selected_tags()
+                end
+            end
+        end),
     --battery status dialog
     awful.key({ modkey,           }, "b",
         function ()
@@ -510,6 +519,16 @@ clientkeys = gears.table.join(
                 c:move_to_tag(tag)
             end
         end,  {description = "move to next empty tag", group = "client"}),
+    awful.key({ modkey, "Mod1", "Shift"    }, "o",
+        function (c)
+            local screen = awful.screen.focused()
+            local tag = getFreeTag(screen)
+            if tag ~= nil then
+                for k, v in pairs(screen:get_clients()) do
+                    v:move_to_tag(tag)
+                end
+            end
+        end,  {description = "move all to next empty tag", group = "client"}),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end,
               {description = "toggle keep on top", group = "client"}),
       awful.key({ modkey, "Shift"   }, "n",
@@ -541,7 +560,12 @@ clientkeys = gears.table.join(
             c.maximized_horizontal = not c.maximized_horizontal
             c:raise()
         end ,
-        {description = "(un)maximize horizontally", group = "client"})
+        {description = "(un)maximize horizontally", group = "client"}),
+    awful.key({modkey,            }, "y",
+        function(c)
+            c:tags({})
+            awful.tag.viewmore(awful.screen.focused().selected_tags)
+        end)
 )
 
 -- Bind all key numbers to tags.
