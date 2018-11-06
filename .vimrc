@@ -48,6 +48,7 @@ imap KH <Esc>u
 cmap jf <C-c>
 cmap KJ <Esc>l
 vmap v <Esc>
+vmap jf <Esc>
 nmap ; :
 nmap <Space>h 10h
 nmap <Space>l 10l
