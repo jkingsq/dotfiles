@@ -31,9 +31,6 @@ hi ColorColumn cterm=NONE ctermbg=235 guibg=#262626
 highlight Trailing ctermbg=darkblue ctermfg=white guibg=darkblue guifg=white
 match Trailing /\s\+$/
 
-"   highlight BEmoji gui=bold ctermbg=red ctermfg=white
-"   match BEmoji /B/
-
 map <PageUp> <>
 map <PageDown> <>
 map <C-h> gT
