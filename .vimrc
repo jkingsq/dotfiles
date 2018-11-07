@@ -2,7 +2,7 @@ set t_Co=256
 
 colorscheme torte
 syntax enable
-hi normal ctermbg=236
+hi normal ctermbg=236 guibg=#303030
 set number
 set relativenumber
 set cursorline
@@ -13,10 +13,10 @@ set colorcolumn=81
 set timeoutlen=150
 set laststatus=2
 
-hi User1 ctermbg=grey ctermfg=black
-hi User2 ctermbg=darkgreen ctermfg=white
-hi User3 ctermbg=blue ctermfg=white
-hi User4 ctermbg=red ctermfg=white
+hi User1 ctermbg=grey ctermfg=black guibg=grey guifg=black
+hi User2 ctermbg=darkgreen ctermfg=white guibg=darkgreen guifg=white
+hi User3 ctermbg=blue ctermfg=white guibg=blue guifg=white
+hi User4 ctermbg=red ctermfg=white guibg=red guifg=white
 
 set statusline=
 set statusline+=%3*\ %f%4*%r%2*%m%3*\ \  "blue section, filename, modification
@@ -24,9 +24,9 @@ set statusline+=%1*%F "full path
 set statusline+=%= "right side of statusline below
 set statusline+=<\ %l\ /\ %L,\ %c\ \>\ %y%2*\ %n\  "line, column, filetype, buffer
 
-hi CursorLine cterm=NONE ctermbg=234 guibg=black
-hi CursorColumn cterm=NONE ctermbg=234 guibg=black
-hi ColorColumn cterm=NONE ctermbg=235 guibg=black
+hi CursorLine cterm=NONE ctermbg=234 guibg=#1c1c1c
+hi CursorColumn cterm=NONE ctermbg=234 guibg=#1c1c1c
+hi ColorColumn cterm=NONE ctermbg=235 guibg=#262626
 
 highlight Trailing ctermbg=darkblue ctermfg=white guibg=darkblue guifg=white
 match Trailing /\s\+$/
