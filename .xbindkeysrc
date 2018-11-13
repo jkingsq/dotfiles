@@ -81,8 +81,11 @@
 "amixer set Capture toggle"
    XF86AudioMicMute
 
+# Raise brightness 5%
 "xbacklight -inc 5"
    XF86MonBrightnessUp
+
+# Decrease brightness 5% with a minimum of 0.2%
 "if [ $(echo $(xbacklight -get) '< 5.2' | bc -l) == 1 ]; then xbacklight -set 0.2; else xbacklight -dec 5; fi"
    XF86MonBrightnessDown
 
