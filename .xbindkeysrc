@@ -81,9 +81,9 @@
 "amixer set Capture toggle"
    XF86AudioMicMute
 
-"sudo xbacklight -inc 5"
+"xbacklight -inc 5"
    XF86MonBrightnessUp
-"sudo xbacklight -dec 5; sudo xbacklight -inc 1"
+"if [ $(echo $(xbacklight -get) '< 5.2' | bc -l) == 1 ]; then xbacklight -set 0.2; else xbacklight -dec 5; fi"
    XF86MonBrightnessDown
 
 ##################################
