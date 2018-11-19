@@ -292,18 +292,18 @@ function snapMouse(c)
         --  top-left
         --  bottom-left
         --  top-right
-        if mousePos.x == right and mousePos.y == bottom then
-            coords.x = left
-            coords.y = top
-        elseif mousePos.x == left and mousePos.y == top then
+        if mousePos.x == left and mousePos.y == top then
+            coords.x = right
+            coords.y = bottom
+        elseif mousePos.x == right and mousePos.y == bottom then
             coords.x = left
             coords.y = bottom
         elseif mousePos.x == left and mousePos.y == bottom then
             coords.x = right
             coords.y = top
         else
-            coords.x = right
-            coords.y = bottom
+            coords.x = left
+            coords.y = top
         end
 
         mouse.coords(coords, true)
