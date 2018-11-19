@@ -1,0 +1,4 @@
+#!/bin/sh
+. /etc/X11/xinit/xprofile
+
+xss-lock -- xscreensaver-command --lock &
