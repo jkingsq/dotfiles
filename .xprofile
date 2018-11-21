@@ -2,3 +2,5 @@
 . /etc/X11/xinit/xprofile
 
 xss-lock -- xscreensaver-command --lock &
+
+xmodmap ~/.xmodmap

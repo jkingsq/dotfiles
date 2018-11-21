@@ -1,0 +1,43 @@
+! Replace Caps_Lock with Mode_switch
+clear lock
+keycode 66 = Mode_switch Mode_switch Mode_switch Mode_switch
+
+! Caps_Lock does the following:
+! allows for hjkl movement in place of arrow keys while held
+! Emulates a numpad when Caps_Lock+Shift is held:
+! uio    789
+! jkl -> 456
+! m,.    123
+! n      0
+keycode 30 = u U u 7 u U
+keycode 31 = i I i 8 i I
+keycode 32 = o O o 9 o O
+
+keycode 43 = h H Left Left h H
+
+keycode 44 = j J Down 4 j J
+keycode 45 = k K Up 5 k K
+keycode 46 = l L Right 6 l L
+
+keycode 57 = n N n 0 n N
+keycode 58 = m M m 1 m M
+keycode 59 = comma less comma 2 comma less
+keycode 60 = period greater period 3 period greater
+
+! Caps_Lock+e functions as End
+keycode 26 = e E End End e E
+
+! Caps_Lock+r functions as the context menu key
+keycode 27 = r R Menu Menu r R
+
+! Caps_Lock+Return toggles Caps_Lock
+keycode 36 = Return NoSymbol Caps_Lock NoSymbol
+
+! Caps_Lock+a functions as Home
+keycode 38 = a A Home Home a A
+
+! Caps_Lock+d functions as Delete
+keycode 40 = d D Delete Delete d D
+
+! Caps_Lock+Space functions as Escape
+keycode 65 = space NoSymbol Escape Escape space NoSymbol
