@@ -3,8 +3,14 @@ set t_Co=256
 colorscheme torte
 syntax enable
 hi normal ctermbg=236 guibg=#303030
+
+" allow override of variables used by netrw
+let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
+
 set number
 set relativenumber
+autocmd FileType netrw set number
+autocmd FileType netrw set relativenumber
 set cursorline
 set cursorcolumn
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
