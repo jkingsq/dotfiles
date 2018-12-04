@@ -11,6 +11,7 @@ set number
 set relativenumber
 autocmd FileType netrw set number
 autocmd FileType netrw set relativenumber
+
 set cursorline
 set cursorcolumn
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
@@ -41,7 +42,6 @@ map <PageUp> <>
 map <PageDown> <>
 map <C-h> gT
 map <C-l> gt
-map <C-/> :nohl
 map <C-j> <C-W>w
 map <C-k> <C-W>W
 imap jf <Esc>l
@@ -53,9 +53,3 @@ cmap KJ <Esc>l
 vmap v <Esc>
 vmap jf <Esc>
 nmap ; :
-nmap <Space>h 10h
-nmap <Space>l 10l
-nmap <Space><Space>h ^
-nmap <Space><Space>l $
-nmap <Space>j 5j
-nmap <Space>k 5k
