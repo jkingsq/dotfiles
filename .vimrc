@@ -8,9 +8,9 @@ hi normal ctermbg=236 guibg=#303030
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 
 set number
-set relativenumber
+" set relativenumber
 autocmd FileType netrw set number
-autocmd FileType netrw set relativenumber
+" autocmd FileType netrw set relativenumber
 
 set cursorline
 set cursorcolumn
