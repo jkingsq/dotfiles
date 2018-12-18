@@ -53,3 +53,4 @@ cmap KJ <Esc>l
 vmap v <Esc>
 vmap jf <Esc>
 nmap ; :
+nmap <Space> :nohl<CR>
