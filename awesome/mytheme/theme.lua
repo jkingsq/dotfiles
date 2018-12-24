@@ -9,7 +9,7 @@
 
 -- {{{ Main
 theme = {}
-theme.wallpaper = "~/.config/awesome/mytheme/wallpaper.png"
+theme.wallpaper = "~/.config/awesome/mytheme/wallpaper.svg"
 theme.wallpaper_cmd = {"hsetroot -center " .. theme.wallpaper}
 -- }}}
 
