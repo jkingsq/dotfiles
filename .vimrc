@@ -10,6 +10,7 @@ let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 set number
 " set relativenumber
 autocmd FileType netrw set number
+autocmd FileType help set number
 " autocmd FileType netrw set relativenumber
 
 set cursorline
