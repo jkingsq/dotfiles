@@ -538,6 +538,13 @@ clientkeys = gears.table.join(
               c.minimized = true
           end ,
           {description = "minimize", group = "client"}),
+    awful.key({ modkey,           }, "n",
+        function(c)
+            c.opacity = (c.opacity == 1.0 and 0.6 or 1.00)
+            -- ontop seems to usually be nil
+            c.ontop = c.opacity ~= 1.0
+            awful.client.focus.byidx(1)
+        end),
     awful.key({ modkey,           }, "m",
         function (c)
             if not maximized then

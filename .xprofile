@@ -4,3 +4,5 @@
 xss-lock -- xscreensaver-command --lock &
 
 xmodmap ~/.xmodmap
+
+xcompmgr &
