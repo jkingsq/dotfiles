@@ -2,3 +2,5 @@ XTerm.vt100.reverseVideo: true
 XTerm.vt100.scrollBar: false
 XTerm*bellIsUrgent: true
 XTerm*cursorBlink: true
+XTerm*cursorOnTime: 150
+Xterm*cursorOffTime: 150
