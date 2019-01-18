@@ -506,7 +506,11 @@ clientkeys = gears.table.join(
         {description = "force kill", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
-    awful.key({ modkey, "Mod1"    }, "f",  awful.client.floating.toggle                     ,
+    awful.key({ modkey, "Mod1"    }, "f",
+        function (c)
+            c.floating = not c.floating
+            setBorderWidth(c)
+        end,
               {description = "toggle floating", group = "client"}),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
@@ -547,11 +551,6 @@ clientkeys = gears.table.join(
         end),
     awful.key({ modkey,           }, "m",
         function (c)
-            if not maximized then
-                c.border_width = 0
-            else
-                c.border_width = beautiful.border_width
-            end
             c.maximized = not c.maximized
             c:raise()
         end ,
@@ -710,6 +709,7 @@ client.connect_signal("manage", function (c)
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
+    setBorderWidth(c)
 end)
 
 -- Add a titlebar if titlebars_enabled is set to true in the rules.
@@ -763,25 +763,22 @@ end)
 --end)
 
 function setBorderWidth(c)
-    local screen = c.screen
-    if #screen:get_clients() == 1 or c.maximized then
-        c.border_width = 0
-    else
+    if c.floating and not c.maximized and not c.fullscreen then
         c.border_width = beautiful.border_width
+    else
+        c.border_width = 0
     end
 end
 
 client.connect_signal("focus", function(c)
     c.border_color = beautiful.border_focus
 end)
-client.connect_signal("property::size", setBorderWidth)
+client.connect_signal("property::floating", setBorderWidth)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 autostart = {
     "xscreensaver",
     "nm-applet",
-    "xss-lock -- xscreensaver-command -lock",
-    "xbindkeys -p"
 }
 
 for k, v in pairs(autostart) do

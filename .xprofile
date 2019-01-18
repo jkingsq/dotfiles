@@ -3,6 +3,8 @@
 
 xss-lock -- xscreensaver-command --lock &
 
+xbindkeys -p
+
 xmodmap ~/.xmodmap
 
-xcompmgr &
+compton --backend glx --inactive-dim 0.3 &
