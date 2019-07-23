@@ -241,15 +241,28 @@ function getIndexedTags(screen)
     end
     return result
 end
+function getTagIndeces(screen)
+    local result = {}
+    local tags = getIndexedTags(screen)
+    for index, tag in pairs(tags) do
+        table.insert(result, index)
+    end
+    table.sort(result)
+    return result
+end
 function getEndTags(screen)
     local tags = getIndexedTags(screen)
+    local indeces = getTagIndeces(screen)
     local first, last = nil, nil
-    for index, tag in pairs(tags) do
+    for _, index in pairs(indeces) do
+        local tag = tags[index]
         if first == nil then first = index end
         if last  == nil then last  = index end
+        if tags[first]:clients() == 0 then
+            first = index
+        end
         if #tag:clients() ~= 0 then
-            first = math.min(first, index)
-            last = math.max(last, index)
+            last = index
         end
     end
     return {min = tags[first], max = tags[last]}
@@ -444,6 +457,46 @@ globalkeys = gears.table.join(
                 if #v:tags() == 0 then
                     v:move_to_screen(awful.screen.focused())
                     v:to_selected_tags()
+                end
+            end
+        end),
+    awful.key({ modkey, "Mod1"    }, "p",
+        function()
+            local screen = awful.screen.focused()
+            local tags = getIndexedTags(screen)
+            local indeces = getTagIndeces(screen)
+            local currentTag = screen.selected_tag
+            local toPaste = {}
+            for _, client in pairs(client.get()) do
+                if #client:tags() == 0 then
+                    table.insert(toPaste, client)
+                end
+            end
+            local shiftUpTo = nil
+            for _, index in pairs(indeces) do
+                local tag = tags[index]
+                if index > currentTag.index and #tag:clients() == 0 then
+                    shiftUpTo = index
+                    break
+                end
+            end
+            if shiftUpTo == nil then
+                --no room to shift
+                return
+            end
+            for _, index in pairs(indeces) do
+                if index >= currentTag.index and index <= shiftUpTo then
+                    local tag = tags[index]
+                    local pasting = toPaste
+                    toPaste = {}
+                    for _, client in pairs(tag:clients()) do
+                        client:tags({})
+                        table.insert(toPaste, client)
+                    end
+                    for _, client in pairs(pasting) do
+                        client:move_to_screen(screen)
+                        client:tags({tag})
+                    end
                 end
             end
         end),
