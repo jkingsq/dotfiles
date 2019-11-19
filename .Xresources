@@ -1,6 +1,8 @@
 XTerm.vt100.reverseVideo: true
 XTerm.vt100.scrollBar: false
+*.vt100.metaSendsEscape: true
 XTerm*bellIsUrgent: true
 XTerm*cursorBlink: true
 XTerm*cursorOnTime: 150
 Xterm*cursorOffTime: 150
+Xterm*eightBitInput: false
