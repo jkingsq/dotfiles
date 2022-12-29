@@ -21,6 +21,11 @@ set hlsearch
 set colorcolumn=81
 set timeoutlen=150
 set laststatus=2
+set foldmethod=indent
+set foldlevel=1
+set foldminlines=5
+
+autocmd FileType elixir set tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 
 hi User1 ctermbg=grey ctermfg=black guibg=grey guifg=black
 hi User2 ctermbg=darkgreen ctermfg=white guibg=darkgreen guifg=white
@@ -29,7 +34,8 @@ hi User4 ctermbg=red ctermfg=white guibg=red guifg=white
 
 set statusline=
 set statusline+=%3*\ %f%4*%r%2*%m%3*\ \  "blue section, filename, modification
-set statusline+=%1*%F "full path
+"set statusline+=%1*%F "full path
+set statusline+=%1*
 set statusline+=%= "right side of statusline below
 set statusline+=<\ %l\ /\ %L,\ %c\ \>\ %y%2*\ %n\  "line, column, filetype, buffer
 
@@ -43,6 +49,7 @@ match Trailing /\s\+$/
 map <PageUp> <>
 map <PageDown> <>
 map <C-h> gT
+nmap <Backspace> gT
 map <C-l> gt
 map <C-j> <C-W>w
 map <C-k> <C-W>W
@@ -54,5 +61,4 @@ cmap jf <C-c>
 cmap KJ <Esc>l
 vmap v <Esc>
 vmap jf <Esc>
-nmap ; :
 nmap <Space> :nohl<CR>
