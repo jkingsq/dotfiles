@@ -21,6 +21,7 @@ set hlsearch
 set colorcolumn=81
 set timeoutlen=150
 set laststatus=2
+set foldmethod=indent
 
 hi User1 ctermbg=grey ctermfg=black guibg=grey guifg=black
 hi User2 ctermbg=darkgreen ctermfg=white guibg=darkgreen guifg=white
