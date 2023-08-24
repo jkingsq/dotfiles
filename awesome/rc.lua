@@ -45,7 +45,7 @@ end
 beautiful.init("~/.config/awesome/mytheme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "kitty"
 editor = "vim"
 -- editor = os.getenv("EDITOR") or "vi"
 --
