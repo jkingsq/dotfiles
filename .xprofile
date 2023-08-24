@@ -1,10 +1,15 @@
 #!/bin/sh
-. /etc/X11/xinit/xprofile
+#. /etc/X11/xinit/xprofile
 
+xscreensaver &
 xss-lock -- xscreensaver-command --lock &
 
 xbindkeys -p
 
 xmodmap ~/.xmodmap
 
-compton --backend glx --inactive-dim 0.3 &
+compton --backend glx --inactive-dim 0.3 --menu-opacity 0.7 --inactive-opacity 1.0 --fade-delta 5 &
+
+xset -b
+
+xrandr --output HDMI-2 --rotate left

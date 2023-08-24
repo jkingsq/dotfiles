@@ -61,12 +61,12 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.fair,
+    awful.layout.suit.fair.horizontal,
     awful.layout.suit.tile,
     awful.layout.suit.tile.top,
     awful.layout.suit.floating,
     --awful.layout.suit.tile.left,
     --awful.layout.suit.tile.bottom,
-    --awful.layout.suit.fair.horizontal,
     --awful.layout.suit.spiral,
     --awful.layout.suit.spiral.dwindle,
     --awful.layout.suit.max,
@@ -600,7 +600,7 @@ clientkeys = gears.table.join(
             c.opacity = (c.opacity == 1.0 and 0.75 or 1.00)
             -- ontop seems to usually be nil
             c.ontop = c.opacity ~= 1.0
-            awful.client.focus.byidx(1)
+            -- awful.client.focus.byidx(1)
         end),
     awful.key({ modkey,           }, "m",
         function (c)
