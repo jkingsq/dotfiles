@@ -35,7 +35,7 @@ hi User4 ctermbg=red ctermfg=white guibg=red guifg=white
 set statusline=
 set statusline+=%3*\ %f%4*%r%2*%m%3*\ \  "blue section, filename, modification
 "set statusline+=%1*%F "full path
-set statusline+=%1*
+set statusline+=%1* "empty grey section
 set statusline+=%= "right side of statusline below
 set statusline+=<\ %l\ /\ %L,\ %c\ \>\ %y%2*\ %n\  "line, column, filetype, buffer
 
