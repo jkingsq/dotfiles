@@ -1,5 +1,7 @@
 [user]
     name = John King
     email = j.king.sq@gmail.com
+[init]
+	defaultBranch = main
 [core]
 	editor = vim
