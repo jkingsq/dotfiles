@@ -82,11 +82,15 @@
    XF86AudioMicMute
 
 # Raise brightness
-"xbacklight -inc $(echo $(xbacklight -get) '/3 + 0.12' | bc -l)"
+# "xbacklight -inc $(echo $(xbacklight -get) '/3 + 0.12' | bc -l)"
+#   XF86MonBrightnessUp
+"backlight_inc 12.5"
    XF86MonBrightnessUp
 
 # Decrease brightness with a minimum of 0.2%
-"if [ $(echo $(xbacklight -get) '<= 0.3' | bc -l) == 1 ]; then xbacklight -set 0.12; else xbacklight -dec $(echo $(xbacklight -get) '/4 + 0.12' | bc -l); fi"
+#"if [ $(echo $(xbacklight -get) '<= 0.3' | bc -l) == 1 ]; then xbacklight -set 0.12; else xbacklight -dec $(echo $(xbacklight -get) '/4 + 0.12' | bc -l); fi"
+#   XF86MonBrightnessDown
+"backlight_inc -12.5"
    XF86MonBrightnessDown
 
 ##################################

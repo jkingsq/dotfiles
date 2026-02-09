@@ -6,9 +6,9 @@ xss-lock -- xscreensaver-command --lock &
 
 xbindkeys -p
 
-xmodmap ~/.xmodmap
+xmodmap ~/.xmodmap && printf "XModMap exited successfully\n"
 
-compton --backend glx --inactive-dim 0.3 --menu-opacity 0.7 --inactive-opacity 1.0 --fade-delta 5 &
+picom --backend glx &
 
 xset -b
 

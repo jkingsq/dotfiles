@@ -1,0 +1,2 @@
+ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight" RUN="/bin/chmod 644 $sys$devpath/max_brightness"
+ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN="/bin/chmod 666 $sys$devpath/brightness"
