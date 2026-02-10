@@ -12,4 +12,7 @@ compton --backend glx --inactive-dim 0.3 --menu-opacity 0.7 --inactive-opacity 1
 
 xset -b
 
-xrandr --output HDMI-2 --rotate left
+xrandr --output DVI-D-0 --rotate right --dpi 128
+xrandr --output DVI-D-0 --right-of DP-0
+xset -dpms
+xset s off
