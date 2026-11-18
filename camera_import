@@ -1,0 +1,113 @@
+#!/bin/bash
+
+source "$(dirname "$(realpath $0)")"/script_helpers.bash
+
+CONFIG_FILE="$HOME/.camera_import"
+
+pick \
+    "Choose which removable media to import from:" \
+    "$(lsblk --noheadings --output PATH --filter 'RM==true && FSTYPE=~"."')"
+
+MEDIA="$PICK"
+
+if [ -z $MEDIA ]; then
+    printf "No removable media found. Aborting.\n"
+
+    exit
+fi
+
+pick \
+    "Choose the destination directory:" \
+    "$(cat "$CONFIG_FILE" | strip_comments)"
+
+IMPORT_TO="$PICK"
+
+if [ -z $IMPORT_TO ]; then
+    printf "No destination directory found from $CONFIG_FILE - Aborting.\n"
+
+    exit
+fi
+
+printf "Importing from $MEDIA\n"
+
+function mountpoint() {
+    lsblk --noheadings --output MOUNTPOINT --filter "PATH==\"$1\""
+}
+
+INITIAL_MOUNTPOINT="$(mountpoint $MEDIA)"
+
+MEDIA_ROOT=$INITIAL_MOUNTPOINT
+
+if [ -z $INITIAL_MOUNTPOINT ]; then
+    printf "Mounting $MEDIA\n"
+    gio mount -d $MEDIA || exit
+
+    MEDIA_ROOT="$(mountpoint $MEDIA)"
+fi
+
+RAW_PARENT_DIR='DCIM'
+RAW_SUBDIR_PATTERN='???_????'
+RAW_FILE_PATTERN='IMGP????.PEF'
+IMPORT_TO="$HOME/Pictures/Pentax_K-r"
+
+# State used for logging ranges of files
+last_op=init
+range_size=0
+range_begin=""
+range_end=""
+
+function log_operation() {
+    # Log contiguous ranges of files that required the same operation.
+    # i.e. print one message for every contiguous range of copied/skipped files
+    operation=$1
+    filename=$2
+    if [ $operation != $last_op ]; then
+        if [ $range_size -gt 1 ]; then
+            printf "%s\t\t%s..%s\t(%s files)\n" "$last_op" "$range_begin" "$range_end" "$range_size"
+        elif [ $range_size -eq 1 ]; then
+            printf "%s\t\t%s\t(1 file)\n" "$last_op" "$range_begin"
+        fi
+
+        # begin new range
+        range_size=1
+        range_begin=$filename
+    else
+        range_size=$((range_size+1))
+    fi
+    range_end=$filename
+    last_op=$operation
+}
+
+pushd $MEDIA_ROOT/$RAW_PARENT_DIR > /dev/null
+
+printf "Importing %s -> %s \n" \
+    "$MEDIA_ROOT/$RAW_PARENT_DIR/$RAW_SUBDIR_PATTERN/$RAW_FILE_PATTERN" \
+    "$IMPORT_TO"
+
+for dir in $RAW_SUBDIR_PATTERN; do
+    pushd $dir > /dev/null
+
+    for file in $RAW_FILE_PATTERN; do
+        imported_filename="$IMPORT_TO/${dir}_$file"
+
+        if [ ! -e "$imported_filename" ]; then
+            # Filename doesn't exist in the import dir. Copy it!
+            cp $file $imported_filename
+            log_operation "Copied" ${dir}_$file
+        else
+            # Skip file already in the import dir
+            log_operation "Skipped" ${dir}_$file
+        fi
+    done
+
+    popd > /dev/null
+done
+
+popd > /dev/null
+
+if [ -z $INITIAL_MOUNTPOINT ]; then
+    printf "Unmounting $MEDIA\n"
+    gio mount -u $MEDIA_ROOT
+fi
+
+log_operation "done"
